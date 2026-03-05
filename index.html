@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>215812</title>
+  <meta name="description" content="Minimal, mysterious landing page for 215812 — professional glitch effect." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#050505;
+      --fg:#ffffff;
+      --accent1:#ff4d6d; /* pink */
+      --accent2:#6df0ff; /* cyan */
+      --accent3:#ffd36d; /* amber */
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background: var(--bg);
+      color:var(--fg);
+      font-family: 'Inter', system-ui, sans-serif;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+    }
+
+    .headline{
+      position:relative;
+      font-weight:900;
+      letter-spacing:0.04em;
+      font-family:'JetBrains Mono', monospace;
+      font-size:clamp(48px, 14vw, 160px);
+      user-select:none;
+      display:inline-block;
+      padding:0 6px;
+      animation:breathe 6s ease-in-out infinite;
+    }
+
+    .headline .base{
+      color:var(--fg);
+      filter:drop-shadow(0 6px 18px rgba(0,0,0,0.8));
+    }
+
+    .glitch-layer{
+      position:absolute;
+      top:0;left:0;right:0;bottom:0;
+      mix-blend-mode:screen;
+      pointer-events:none;
+    }
+    .glitch-layer--1{ color:var(--accent1) }
+    .glitch-layer--2{ color:var(--accent2) }
+    .glitch-layer--3{ color:var(--accent3) }
+
+    @keyframes breathe{
+      0%{ transform:scale(1)}
+      50%{ transform:scale(1.02)}
+      100%{ transform:scale(1)}
+    }
+
+    .glitch-active .glitch-layer--1{ animation:glitch1 420ms steps(2,end) infinite }
+    .glitch-active .glitch-layer--2{ animation:glitch2 360ms steps(2,end) infinite }
+    .glitch-active .glitch-layer--3{ animation:glitch3 300ms steps(2,end) infinite }
+
+    @keyframes glitch1{
+      0%{ transform:translate(-2px,-2px) }
+      25%{ transform:translate(8px,2px) }
+      50%{ transform:translate(-6px,-1px) }
+      75%{ transform:translate(10px,4px) }
+      100%{ transform:translate(-2px,-2px) }
+    }
+    @keyframes glitch2{
+      0%{ transform:translate(2px,1px) }
+      20%{ transform:translate(-8px,-4px) }
+      50%{ transform:translate(6px,3px) }
+      80%{ transform:translate(-12px,-6px) }
+      100%{ transform:translate(2px,1px) }
+    }
+    @keyframes glitch3{
+      0%{ transform:translate(0,0) }
+      30%{ transform:translate(12px,-3px) }
+      60%{ transform:translate(-10px,4px) }
+      100%{ transform:translate(0,0) }
+    }
+  </style>
+</head>
+<body>
+  <h1 class="headline">
+    <span class="base">215812</span>
+    <span class="glitch-layer glitch-layer--1" aria-hidden="true">215812</span>
+    <span class="glitch-layer glitch-layer--2" aria-hidden="true">215812</span>
+    <span class="glitch-layer glitch-layer--3" aria-hidden="true">215812</span>
+  </h1>
+
+  <script>
+    const headline = document.querySelector('.headline');
+
+    // toggle glitch effect on hover/touch
+    headline.addEventListener('mouseenter', () => document.documentElement.classList.add('glitch-active'));
+    headline.addEventListener('mouseleave', () => document.documentElement.classList.remove('glitch-active'));
+    headline.addEventListener('touchstart', () => document.documentElement.classList.add('glitch-active'));
+    headline.addEventListener('touchend', () => document.documentElement.classList.remove('glitch-active'));
+  </script>
+</body>
+</html>
